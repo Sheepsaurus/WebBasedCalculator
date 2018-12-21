@@ -17,7 +17,7 @@ namespace WPFVariation
             set 
             {
                 labelText = value;
-                OnPropertyChanged();
+                RaisePropertyChanged("LabelText");
             }             
         }
 
@@ -29,27 +29,27 @@ namespace WPFVariation
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button b)
-            {
-                MessageBox.Show(b.Content.ToString());
-                LabelText += b.Content.ToString();
-            }
-        }
+		{
+			ChangeInput(sender);
+		}
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		private void ChangeInput(object sender)
+		{
+			if (sender is Button b)
+			{
+				MessageBox.Show(b.Content.ToString());
+				LabelText += b.Content.ToString();
+			}
+		}
 
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-                handler(this, e);
-        }
+		public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(
-        [System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
-    }
+		private void RaisePropertyChanged(string property)
+		{
+			if (PropertyChanged != null)
+			{
+				PropertyChanged(this, new PropertyChangedEventArgs(property));
+			}
+		}
+	}
 }

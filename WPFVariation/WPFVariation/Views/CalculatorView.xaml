@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="WPFVariation.Views.CalculatorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFVariation.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="540" d:DesignWidth="300">
+    <Grid>
+        <ItemsControl ItemsSource="{Binding Path=Buttons}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Grid.RowSpan="5" Grid.Column="4">
+                        <Button Grid.Column="{Binding Path=Column}" Grid.Row="{Binding Path=Row}" Margin="10" Background="{Binding Path=Backgroundcolour}" Content="{Binding Path=Content}" FontSize="32"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>            
+    </Grid>
+</UserControl>
